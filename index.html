@@ -46,6 +46,18 @@
       max-width: 96vw;
       margin-bottom: 28px;
     }
+    /* 客服头像样式 */
+    .profile-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(38,133,250,0.15);
+      border: 2px solid var(--main-blue-light);
+      margin-bottom: 18px;
+      margin-top: -10px;
+      background: #fff;
+    }
     h1 {
       font-size: 28px;
       color: var(--main-blue-dark);
@@ -116,6 +128,10 @@
         font-size: 17px;
         margin: 10px 0;
       }
+      .profile-avatar {
+        width: 48px;
+        height: 48px;
+      }
     }
   </style>
 </head>
@@ -128,6 +144,8 @@
 
   <div class="main-content">
     <h1>腾讯微保在线客服</h1>
+    <!-- 职业风格的圆形女头像 -->
+    <img class="profile-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="客服头像" />
     <button id="callButton" onclick="makeCall()">📞 呼叫客服</button>
     <button id="hangupButton" onclick="hangupCall()" disabled>🛑 挂断</button>
     <div id="callStatus">未呼叫</div>
