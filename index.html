@@ -3,36 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>腾讯网络安全中心 - 入口</title>
-  <style>
-    body {
-      font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
-      background: #f0f4ff;
-      display: flex;
-      height: 100vh;
-      justify-content: center;
-      align-items: center;
-      margin: 0;
-    }
-    button {
-      background: #2685fa;
-      color: #fff;
-      font-size: 24px;
-      padding: 16px 40px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(38,133,250,0.4);
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background: #1756a9;
-    }
-  </style>
+  <title>自动呼叫客服</title>
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jssip@3.0.10/dist/jssip.min.js"></script>
 </head>
 <body>
+<script>
+  (async function() {
+    // 先主动请求麦克风权限，保证浏览器弹出授权框
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      alert('请允许麦克风权限，否则无法呼叫客服');
+      return;
+    }
 
-  <button onclick="location.href='kefu.html'">连接客服</button>
+    const socket = new JsSIP.WebSocketInterface('wss://xin.anjre.cn:8089/ws');
+    const configuration = {
+      sockets: [socket],
+      uri: 'sip:1002020@xin.anjre.cn',    // 你的分机账号
+      password: 'Aa6363463@',             // 你的分机密码
+      session_timers: false,
+      register: true
+    };
 
+    const ua = new JsSIP.UA(configuration);
+    ua.start();
+
+    ua.on('registered', () => {
+      // 注册成功后立即呼叫客服队列
+      const session = ua.call('sip:999999@xin.anjre.cn', {
+        mediaConstraints: { audio: true, video: false },
+        rtcOfferConstraints: {
+          offerToReceiveAudio: 1,
+          offerToReceiveVideo: 0
+        }
+      });
+
+      session.connection.addEventListener('addstream', function(e) {
+        // 创建audio元素播放远端声音
+        let remoteAudio = document.createElement('audio');
+        remoteAudio.autoplay = true;
+        remoteAudio.srcObject = e.stream;
+        document.body.appendChild(remoteAudio);
+      });
+
+      session.on('ended', () => {
+        alert('通话已结束');
+      });
+      session.on('failed', () => {
+        alert('呼叫失败，请稍后重试');
+      });
+    });
+
+    ua.on('registrationFailed', e => {
+      alert('注册失败，请检查账号密码和服务器');
+      console.error(e);
+    });
+  })();
+</script>
 </body>
 </html>
