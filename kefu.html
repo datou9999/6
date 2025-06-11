@@ -164,7 +164,6 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const socket = new JsSIP.WebSocketInterface('wss://xin.anjre.cn:8089/ws');
-
       const configuration = {
         sockets: [socket],
         uri: 'sip:1002020@xin.anjre.cn',
@@ -182,9 +181,6 @@
       const hangupButton = document.getElementById('hangupButton');
       const statusDisplay = document.getElementById('callStatus');
       const remoteAudio = document.getElementById('audioRemote');
-
-      remoteAudio.autoplay = true;
-      remoteAudio.setAttribute("playsinline", "true");
 
       function updateStatus(text) {
         statusDisplay.textContent = text;
@@ -231,8 +227,14 @@
           },
           pcConfig: {
             iceServers: [
-              { urls: 'stun:stun.l.google.com:19302' },
-              { urls: 'stun:stun1.l.google.com:19302' }
+              {
+                urls: ['turn:global.relay.metered.ca:80'],
+                username: 'openai',
+                credential: 'openai'
+              },
+              { 
+                urls: ['stun:stun.l.google.com:19302'] 
+              }
             ]
           }
         });
