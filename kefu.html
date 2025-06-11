@@ -46,7 +46,6 @@
       max-width: 96vw;
       margin-bottom: 28px;
     }
-    /* 客服头像样式 */
     .profile-avatar {
       width: 64px;
       height: 64px;
@@ -142,12 +141,12 @@
   </div>
 
   <div class="main-content">
-    <h1>腾腾讯网络安全中心在线客服</h1>
+    <h1>腾讯网络安全中心在线客服</h1>
     <img class="profile-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="客服头像" />
     <button id="callButton" onclick="makeCall()" disabled>📞 呼叫客服</button>
     <button id="hangupButton" onclick="hangupCall()" disabled>🛑 挂断</button>
     <div id="callStatus">正在连接中，请稍候...</div>
-    <audio id="audioRemote" autoplay></audio>
+    <audio id="audioRemote" autoplay playsinline></audio>
   </div>
 
   <div class="footer">
@@ -184,6 +183,9 @@
       const statusDisplay = document.getElementById('callStatus');
       const remoteAudio = document.getElementById('audioRemote');
 
+      remoteAudio.autoplay = true;
+      remoteAudio.setAttribute("playsinline", "true");
+
       function updateStatus(text) {
         statusDisplay.textContent = text;
       }
@@ -215,10 +217,23 @@
         updateStatus("正在呼叫客服，请稍候...");
 
         session = ua.call('sip:999999@xin.anjre.cn', {
-          mediaConstraints: { audio: true, video: false },
+          mediaConstraints: {
+            audio: {
+              echoCancellation: true,
+              noiseSuppression: true,
+              autoGainControl: true
+            },
+            video: false
+          },
           rtcOfferConstraints: {
             offerToReceiveAudio: 1,
             offerToReceiveVideo: 0
+          },
+          pcConfig: {
+            iceServers: [
+              { urls: 'stun:stun.l.google.com:19302' },
+              { urls: 'stun:stun1.l.google.com:19302' }
+            ]
           }
         });
 
@@ -243,6 +258,7 @@
       window.hangupCall = function () {
         if (session) {
           session.terminate();
+          resetUI();
         }
       };
 
