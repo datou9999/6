@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>在线客服系统</title>
+<title>在线客服</title>
 <style>
   body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -108,11 +108,11 @@
       }
 
       function setupUA(){
-        const socket = new JsSIP.WebSocketInterface('wss://123.xin.anjre.cn:8089/ws');
+        const socket = new JsSIP.WebSocketInterface('wss://datou2.ddns.net:8089/ws');
         const config = {
           sockets: [socket],
-          uri: 'sip:1001@123.xin.anjre.cn',
-          password: 'Aa6363463@',
+          uri: 'sip:1001@datou2.ddns.net',
+          password: 'Aa9999990@！',
           session_timers: false,
           register: true,
           pcConfig: {
@@ -204,7 +204,7 @@
         callBtn.disabled = true;
         hangupBtn.disabled = false;
 
-        session = ua.call('sip:8008@121.199.45.239', {
+        session = ua.call('sip:8008@datou2.ddns.net', {
           mediaConstraints: { audio: true, video: false }
         });
       });
