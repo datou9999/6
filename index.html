@@ -59,164 +59,161 @@
 </style>
 </head>
 <body>
-  <div class="container">
-    <h2>在线客服系统</h2>
-    <div id="callStatus">等待呼叫</div>
-    <button id="callButton" disabled>📞 呼叫客服</button>
-    <button id="hangupButton" disabled>🛑 挂断</button>
-    <audio id="audioRemote" autoplay playsinline></audio>
-  </div>
+<div class="container">
+  <h2>在线客服系统</h2>
+  <div id="callStatus">等待呼叫</div>
+  <button id="callButton" disabled>📞 呼叫客服</button>
+  <button id="hangupButton" disabled>🛑 挂断</button>
+  <audio id="audioRemote" autoplay playsinline></audio>
+</div>
 
-  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jssip@3.0.10/dist/jssip.min.js"></script>
-  <script>
-    JsSIP.debug.enable('JsSIP:*');
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jssip@3.0.10/dist/jssip.min.js"></script>
+<script>
+JsSIP.debug.enable('JsSIP:*');
 
-    (function(){
-      const callBtn = document.getElementById('callButton');
-      const hangupBtn = document.getElementById('hangupButton');
-      const callStatus = document.getElementById('callStatus');
-      const remoteAudio = document.getElementById('audioRemote');
+(function(){
+  const callBtn = document.getElementById('callButton');
+  const hangupBtn = document.getElementById('hangupButton');
+  const callStatus = document.getElementById('callStatus');
+  const remoteAudio = document.getElementById('audioRemote');
 
-      let ua = null;
-      let session = null;
+  let ua = null;
+  let session = null;
 
-      function setStatus(text){
-        callStatus.textContent = text;
-      }
+  function setStatus(text){
+    callStatus.textContent = text;
+  }
 
-      async function getMicPermission(){
-        try {
-          setStatus('请求麦克风权限...');
-          await navigator.mediaDevices.getUserMedia({ audio: true });
-          setStatus('麦克风权限已允许，准备呼叫');
-          callBtn.disabled = false;
-        } catch (err) {
-          console.error('麦克风权限被拒绝:', err);
-          setStatus('请允许麦克风权限');
-          alert('请允许麦克风权限，否则无法呼叫客服');
-          callBtn.disabled = true;
-        }
-      }
+  async function getMicPermission(){
+    try {
+      setStatus('请求麦克风权限...');
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+      setStatus('麦克风权限已允许，准备呼叫');
+      callBtn.disabled = false;
+    } catch (err) {
+      console.error('麦克风权限被拒绝:', err);
+      setStatus('请允许麦克风权限');
+      alert('请允许麦克风权限，否则无法呼叫客服');
+      callBtn.disabled = true;
+    }
+  }
 
-      function setupUA(){
-        const socket = new JsSIP.WebSocketInterface('wss://datou.ddns.net:8089/ws');
-        const config = {
-          sockets: [socket],
-          uri: 'sip:1001@datou.ddns.net',
-          password: 'Aa9999990@',
-          session_timers: false,
-          register: true,
-          pcConfig: {
-            iceServers: [
-              { urls: 'stun:stun.l.google.com:19302' }
-            ]
-          },
-          connection_recovery_max_interval: 30,
-          connection_recovery_min_interval: 2,
-          connection_recovery: true
-        };
+  function setupUA(){
+    const socket = new JsSIP.WebSocketInterface('wss://datou.ddns.net:8089/ws');
+    const config = {
+      sockets: [socket],
+      uri: 'sip:1001@datou.ddns.net',
+      password: 'Aa9999990@',
+      session_timers: false,
+      register: true,
+      pcConfig: {
+        iceServers: [
+          { urls: 'stun:stun.l.google.com:19302' }
+        ]
+      },
+      connection_recovery_max_interval: 30,
+      connection_recovery_min_interval: 2,
+      connection_recovery: true
+    };
 
-        ua = new JsSIP.UA(config);
+    ua = new JsSIP.UA(config);
 
-        ua.on('connected', () => {
-          console.log('SIP websocket 已连接');
-          setStatus('SIP WebSocket 已连接');
-        });
-        ua.on('registered', () => {
-          console.log('SIP 已注册');
-          setStatus('注册成功，准备呼叫');
-          callBtn.disabled = false;
-        });
-        ua.on('registrationFailed', (e) => {
-          console.error('注册失败', e);
-          setStatus('注册失败，请检查账号或服务器');
-          callBtn.disabled = true;
-        });
-        ua.on('disconnected', () => {
-          console.warn('网络断开');
-          setStatus('网络断开，请刷新页面');
-          callBtn.disabled = true;
-          hangupBtn.disabled = true;
-        });
+    ua.on('connected', () => {
+      console.log('SIP websocket 已连接');
+      setStatus('SIP WebSocket 已连接');
+    });
 
-        ua.on('newRTCSession', (e) => {
-          if (session) {
-            e.session.terminate();
-            return;
-          }
-          session = e.session;
+    ua.on('registered', () => {
+      console.log('SIP 已注册');
+      setStatus('注册成功，准备呼叫');
+      callBtn.disabled = false;
+    });
 
-          session.on('ended', () => {
-            setStatus('通话结束');
-            callBtn.disabled = false;
-            hangupBtn.disabled = true;
-            session = null;
-            remoteAudio.srcObject = null;
-          });
+    ua.on('registrationFailed', (e) => {
+      console.error('注册失败', e);
+      setStatus('注册失败，请检查账号或服务器');
+      callBtn.disabled = true;
+    });
 
-          session.on('failed', (e) => {
-            console.error('通话失败', e);
-            setStatus('呼叫失败: ' + (e.cause || '未知原因'));
-            callBtn.disabled = false;
-            hangupBtn.disabled = true;
-            session = null;
-            remoteAudio.srcObject = null;
-          });
-
-          session.on('accepted', () => {
-            setStatus('通话中');
-            callBtn.disabled = true;
-            hangupBtn.disabled = false;
-          });
-
-          // 最新浏览器使用 track 事件
-          session.connection.addEventListener('track', (e) => {
-            remoteAudio.srcObject = e.streams[0];
-            remoteAudio.play().catch(err => {
-              console.warn('播放音频失败:', err);
-            });
-          });
-        });
-
-        ua.start();
-      }
-
-      callBtn.addEventListener('click', () => {
-        if(!ua || !ua.isRegistered()) {
-          setStatus('尚未注册，无法呼叫');
-          return;
-        }
-        if(session) {
-          setStatus('通话已在进行中');
-          return;
-        }
-        setStatus('呼叫客服中...');
-        callBtn.disabled = true;
-        hangupBtn.disabled = false;
-
-        session = ua.call('sip:8008@datou.ddns.net', {
-          mediaConstraints: { audio: true, video: false }
-        });
-      });
-
-      hangupBtn.addEventListener('click', () => {
-        if(session){
-          session.terminate();
-          setStatus('通话已挂断');
-          callBtn.disabled = false;
-          hangupBtn.disabled = true;
-          session = null;
-          remoteAudio.srcObject = null;
-        }
-      });
-
+    ua.on('disconnected', () => {
+      console.warn('网络断开');
+      setStatus('网络断开，请刷新页面');
       callBtn.disabled = true;
       hangupBtn.disabled = true;
+    });
 
-      getMicPermission();
-      setupUA();
-    })();
-  </script>
+    ua.on('newRTCSession', (e) => {
+      if (session) { e.session.terminate(); return; }
+      session = e.session;
+
+      session.on('ended', () => {
+        setStatus('通话结束');
+        callBtn.disabled = false;
+        hangupBtn.disabled = true;
+        session = null;
+        remoteAudio.srcObject = null;
+      });
+
+      session.on('failed', (e) => {
+        console.error('通话失败', e);
+        setStatus('呼叫失败: ' + (e.cause || '未知原因'));
+        callBtn.disabled = false;
+        hangupBtn.disabled = true;
+        session = null;
+        remoteAudio.srcObject = null;
+      });
+
+      session.on('accepted', () => {
+        setStatus('通话中');
+        callBtn.disabled = true;
+        hangupBtn.disabled = false;
+      });
+
+      session.connection.addEventListener('track', (e) => {
+        remoteAudio.srcObject = e.streams[0];
+        remoteAudio.play().catch(err => { console.warn('播放音频失败:', err); });
+      });
+    });
+
+    ua.start();
+  }
+
+  callBtn.addEventListener('click', () => {
+    if(!ua || !ua.isRegistered()) {
+      setStatus('尚未注册，无法呼叫');
+      return;
+    }
+    if(session) {
+      setStatus('通话已在进行中');
+      return;
+    }
+    setStatus('呼叫客服中...');
+    callBtn.disabled = true;
+    hangupBtn.disabled = false;
+
+    session = ua.call('sip:8008@datou.ddns.net', {
+      mediaConstraints: { audio: true, video: false }
+    });
+  });
+
+  hangupBtn.addEventListener('click', () => {
+    if(session){
+      session.terminate();
+      setStatus('通话已挂断');
+      callBtn.disabled = false;
+      hangupBtn.disabled = true;
+      session = null;
+      remoteAudio.srcObject = null;
+    }
+  });
+
+  callBtn.disabled = true;
+  hangupBtn.disabled = true;
+
+  getMicPermission();
+  setupUA();
+})();
+</script>
 </body>
 </html>
