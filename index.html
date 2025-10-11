@@ -5,18 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>在线客服</title>
 <style>
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
   body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    margin: 0; padding: 0;
     min-height: 100vh;
     background: linear-gradient(145deg, #e0ecff, #f9f9f9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     padding: 20px;
   }
   .container {
@@ -51,37 +46,15 @@
     margin-top: 10px;
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
-  button:hover:not(:disabled) {
-    background-color: #0056b3;
-    transform: scale(1.02);
-  }
-  button:disabled {
-    background-color: #c0d8ff;
-    cursor: not-allowed;
-  }
-  #hangupButton {
-    background-color: #dc3545;
-    margin-left: 12px;
-  }
-  #hangupButton:hover:not(:disabled) {
-    background-color: #a71d2a;
-  }
-  audio {
-    display: none;
-  }
-
+  button:hover:not(:disabled) { background-color: #0056b3; transform: scale(1.02); }
+  button:disabled { background-color: #c0d8ff; cursor: not-allowed; }
+  #hangupButton { background-color: #dc3545; margin-left: 12px; }
+  #hangupButton:hover:not(:disabled) { background-color: #a71d2a; }
+  audio { display: none; }
   @media (max-width: 480px) {
-    .container {
-      padding: 25px 20px 30px;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      margin: 8px 0;
-    }
-    #hangupButton {
-      margin-left: 0;
-    }
+    .container { padding: 25px 20px 30px; }
+    button { width: 100%; padding: 14px; margin: 8px 0; }
+    #hangupButton { margin-left: 0; }
   }
 </style>
 </head>
@@ -91,7 +64,7 @@
     <div id="callStatus">等待呼叫</div>
     <button id="callButton" disabled>📞 呼叫客服</button>
     <button id="hangupButton" disabled>🛑 挂断</button>
-    <audio id="audioRemote" autoplay></audio>
+    <audio id="audioRemote" autoplay playsinline></audio>
   </div>
 
   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
@@ -127,11 +100,11 @@
       }
 
       function setupUA(){
-        const socket = new JsSIP.WebSocketInterface('wss://datou2.ddns.net:8089/ws');
+        const socket = new JsSIP.WebSocketInterface('wss://datou.ddns.net:8089/ws');
         const config = {
           sockets: [socket],
-          uri: 'sip:1001@datou2.ddns.net',
-          password: 'Aa9999990@！',
+          uri: 'sip:0001@datou.ddns.net',
+          password: 'Aa666888@@',
           session_timers: false,
           register: true,
           pcConfig: {
@@ -143,6 +116,7 @@
           connection_recovery_min_interval: 2,
           connection_recovery: true
         };
+
         ua = new JsSIP.UA(config);
 
         ua.on('connected', () => {
@@ -183,7 +157,7 @@
 
           session.on('failed', (e) => {
             console.error('通话失败', e);
-            setStatus('呼叫失败，请重试');
+            setStatus('呼叫失败: ' + (e.cause || '未知原因'));
             callBtn.disabled = false;
             hangupBtn.disabled = true;
             session = null;
@@ -196,8 +170,9 @@
             hangupBtn.disabled = false;
           });
 
-          session.connection.addEventListener('addstream', (e) => {
-            remoteAudio.srcObject = e.stream;
+          // 最新浏览器使用 track 事件
+          session.connection.addEventListener('track', (e) => {
+            remoteAudio.srcObject = e.streams[0];
             remoteAudio.play().catch(err => {
               console.warn('播放音频失败:', err);
             });
@@ -220,7 +195,7 @@
         callBtn.disabled = true;
         hangupBtn.disabled = false;
 
-        session = ua.call('sip:8008@datou2.ddns.net', {
+        session = ua.call('sip:8008@datou.ddns.net', {
           mediaConstraints: { audio: true, video: false }
         });
       });
