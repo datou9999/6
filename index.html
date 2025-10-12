@@ -103,7 +103,7 @@ JsSIP.debug.enable('JsSIP:*');
     const socket = new JsSIP.WebSocketInterface('wss://datou2.ddns.net:8089/ws');
     const config = {
       sockets: [socket],
-      uri: 'sip:1001@datou.ddns.net',
+      uri: 'sip:1001@datou2.ddns.net',
       password: 'Aa9999990@',
       session_timers: false,
       register: true,
@@ -192,7 +192,7 @@ JsSIP.debug.enable('JsSIP:*');
     callBtn.disabled = true;
     hangupBtn.disabled = false;
 
-    session = ua.call('sip:8008@datou.ddns.net', {
+    session = ua.call('sip:8008@datou2.ddns.net', {
       mediaConstraints: { audio: true, video: false }
     });
   });
