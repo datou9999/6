@@ -3,349 +3,594 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="大头云 DATOU CLOUD，提供3CX、OKCC、PBX、SIP对接、语音网关、即时通讯、WebRTC及海外云服务器部署维护服务。">
-<title>大头云 DATOU CLOUD - 通信系统与云技术服务</title>
+<meta name="theme-color" content="#071426">
+<meta name="description" content="DATOU CLOUD 大头云，全球多云资源供应，海外云服务器、公网IP、CDN、云存储、数据库及企业通信技术服务，开放渠道代理合作。">
+<title>DATOU CLOUD 大头云 | 全球云资源供应商</title>
 
 <style>
 :root {
-  --bg: #07111f;
-  --panel: #0e1d30;
-  --text: #eef5ff;
-  --muted: #a5b5ca;
-  --cyan: #35dfd0;
-  --border: rgba(255,255,255,.10);
+  --bg: #071426;
+  --bg2: #0b1c33;
+  --card: #10243e;
+  --blue: #238cff;
+  --cyan: #25d4ee;
+  --white: #f4f8ff;
+  --muted: #a6b7cc;
+  --border: rgba(120,170,220,.18);
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html { scroll-behavior: smooth; }
+
 body {
   font-family: Arial, "Microsoft YaHei", sans-serif;
   background: var(--bg);
-  color: var(--text);
+  color: var(--white);
   line-height: 1.7;
 }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; }
-.container { width: min(1160px, 92%); margin: auto; }
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: min(1160px, 92%);
+  margin: auto;
+}
 
 header {
-  position: sticky;
+  height: 76px;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
-  background: rgba(7,17,31,.94);
+  background: rgba(7,20,38,.94);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
 }
+
 .nav {
-  min-height: 72px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
 }
-.logo { font-size: 23px; font-weight: 800; letter-spacing: 1px; }
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: white;
+}
+
 .logo span { color: var(--cyan); }
+
 .nav-links {
   display: flex;
-  gap: 27px;
   align-items: center;
+  gap: 27px;
   font-size: 14px;
-  color: var(--muted);
+  color: #d0dcec;
 }
+
 .nav-links a:hover { color: var(--cyan); }
+
+.nav-cta {
+  padding: 10px 20px;
+  background: linear-gradient(90deg,var(--blue),#16b9e8);
+  border-radius: 7px;
+  color: white !important;
+}
+
 .menu-btn {
   display: none;
-  background: transparent;
+  background: none;
+  border: 0;
   color: white;
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: 8px;
+  font-size: 27px;
   cursor: pointer;
 }
+
 .hero {
-  padding: 105px 0 95px;
+  padding: 165px 0 100px;
   background:
-    radial-gradient(circle at 80% 20%, rgba(39,136,255,.22), transparent 35%),
-    radial-gradient(circle at 15% 70%, rgba(53,223,208,.12), transparent 35%);
+    radial-gradient(ellipse at 80% 20%,rgba(18,116,220,.22),transparent 40%),
+    radial-gradient(ellipse at 10% 80%,rgba(16,187,220,.12),transparent 38%),
+    linear-gradient(135deg,#071426,#0b1d35);
+  position: relative;
+  overflow: hidden;
 }
-.hero-content { max-width: 850px; }
+
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border: 1px solid rgba(35,140,255,.12);
+  border-radius: 50%;
+  right: -150px;
+  top: 100px;
+  box-shadow: 0 0 0 55px rgba(35,140,255,.025),
+              0 0 0 110px rgba(35,140,255,.02);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
+
 .eyebrow {
+  display: inline-block;
+  padding: 7px 15px;
+  border: 1px solid rgba(37,212,238,.35);
+  background: rgba(37,212,238,.07);
   color: var(--cyan);
-  font-size: 14px;
-  letter-spacing: 3px;
-  margin-bottom: 18px;
-}
-.hero h1 {
-  font-size: clamp(36px, 6vw, 65px);
-  line-height: 1.2;
+  border-radius: 30px;
+  font-size: 13px;
   margin-bottom: 25px;
 }
-.hero h1 span { color: var(--cyan); }
+
+.hero h1 {
+  font-size: clamp(38px,6vw,67px);
+  line-height: 1.18;
+  margin-bottom: 22px;
+  letter-spacing: -1px;
+}
+
+.hero h1 span {
+  background: linear-gradient(90deg,#39a4ff,#38e2e9);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 .hero p {
-  color: var(--muted);
+  color: #b3c4d9;
   font-size: 17px;
-  max-width: 720px;
-  margin-bottom: 32px;
+  max-width: 650px;
+  margin-bottom: 30px;
 }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
 .btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 13px 23px;
-  border-radius: 9px;
-  background: linear-gradient(120deg, #087fbd, #287fff);
-  color: white;
-  border: none;
+  display: inline-block;
+  padding: 13px 25px;
+  border-radius: 7px;
   font-weight: bold;
-  cursor: pointer;
   transition: .2s;
+  cursor: pointer;
 }
-.btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+
+.btn-primary {
+  background: linear-gradient(90deg,#1684ff,#13b9e5);
+  color: white;
+}
+
 .btn-outline {
-  background: transparent;
-  border: 1px solid rgba(53,223,208,.5);
-  color: var(--cyan);
+  border: 1px solid #47708f;
+  color: white;
 }
-section { padding: 85px 0; }
-.section-heading { text-align: center; margin-bottom: 45px; }
-.section-heading h2 { font-size: 34px; margin-bottom: 12px; }
-.section-heading p { color: var(--muted); }
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.btn:hover { transform: translateY(-3px); }
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 40px;
 }
-.service-card {
-  background: linear-gradient(145deg, var(--panel), #0a1728);
+
+.hero-tags span {
+  color: #b5c7da;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
-  transition: .25s;
-}
-.service-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(53,223,208,.5);
-}
-.service-icon { font-size: 32px; margin-bottom: 16px; }
-.service-card h3 { font-size: 19px; margin-bottom: 12px; }
-.service-card p { color: var(--muted); font-size: 14px; }
-
-.dark-section { background: #0a1829; }
-.solution-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-.solution-card {
-  padding: 28px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-}
-.solution-card h3 { color: var(--cyan); margin-bottom: 10px; }
-.solution-card p { color: var(--muted); font-size: 14px; }
-
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
-}
-.process-item {
-  text-align: center;
-  padding: 25px 15px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-}
-.process-number {
-  width: 42px;
-  height: 42px;
-  margin: 0 auto 15px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: linear-gradient(120deg, #087fbd, #287fff);
-  font-weight: bold;
-}
-.process-item p { color: var(--muted); font-size: 13px; }
-
-.about-box { max-width: 850px; margin: auto; text-align: center; }
-.about-box p { color: var(--muted); margin-top: 18px; }
-
-.contact-box {
-  background: linear-gradient(135deg, #102b46, #102039);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 45px 25px;
-  text-align: center;
-}
-.contact-box h2 { font-size: 32px; margin-bottom: 15px; }
-.contact-box p { color: var(--muted); margin-bottom: 25px; }
-.email-address {
-  color: var(--cyan);
-  font-size: 18px;
-  font-weight: bold;
-  word-break: break-all;
-}
-footer {
-  border-top: 1px solid var(--border);
-  padding: 30px 0;
-  text-align: center;
-  color: #8193aa;
+  background: rgba(255,255,255,.035);
+  border-radius: 5px;
+  padding: 7px 12px;
   font-size: 13px;
 }
 
-/* 固定网页通话按钮 */
-.call-launcher {
-  position: fixed;
-  right: 24px;
-  bottom: 85px;
-  z-index: 300;
-  border: 1px solid rgba(53,223,208,.4);
-  border-radius: 50px;
-  padding: 14px 21px;
-  background: linear-gradient(120deg, #087f88, #1268a8);
-  color: white;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 8px 30px rgba(0,100,180,.3);
-  transition: .2s;
-}
-.call-launcher:hover { transform: translateY(-3px); filter: brightness(1.15); }
+section { padding: 85px 0; }
 
-/* 固定在线客服按钮 */
-.chat-launcher {
-  position: fixed;
-  right: 24px;
-  bottom: 15px;
-  z-index: 300;
-  border: none;
-  border-radius: 50px;
-  padding: 14px 21px;
-  background: linear-gradient(120deg, #176bd5, #2788ff);
-  color: white;
+.section-title {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-title .small {
+  color: var(--cyan);
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.section-title h2 {
+  font-size: clamp(27px,4vw,38px);
+  margin: 9px 0;
+}
+
+.section-title p {
+  color: var(--muted);
   font-size: 15px;
+}
+
+.platforms {
+  background: #09192d;
+}
+
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 17px;
+}
+
+.platform {
+  background: linear-gradient(145deg,#122b49,#0d2038);
+  border: 1px solid var(--border);
+  padding: 25px 17px;
+  text-align: center;
+  border-radius: 12px;
+  transition: .25s;
+}
+
+.platform:hover {
+  border-color: var(--blue);
+  transform: translateY(-5px);
+}
+
+.platform .symbol {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.platform h3 { font-size: 17px; }
+.platform p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.note {
+  color: #8298b2;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 25px;
+}
+
+.services {
+  background: var(--bg);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+.service-card {
+  padding: 27px;
+  background: linear-gradient(145deg,#112944,#0c1e34);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: .25s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: #238cff;
+}
+
+.service-icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-size: 19px;
+  margin-bottom: 9px;
+}
+
+.service-card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.service-card ul {
+  list-style: none;
+  margin-top: 15px;
+  color: #a9bfd5;
+  font-size: 13px;
+}
+
+.service-card li { margin: 5px 0; }
+.service-card li:before {
+  content: "✓";
+  color: var(--cyan);
+  margin-right: 8px;
+}
+
+.promo {
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(29,139,255,.2),transparent 65%),
+    #0a1c32;
+}
+
+.promo-box {
+  border: 1px solid rgba(44,164,255,.35);
+  border-radius: 18px;
+  padding: 55px 25px;
+  text-align: center;
+  background: linear-gradient(135deg,rgba(19,67,111,.5),rgba(11,31,53,.9));
+}
+
+.promo-box h2 {
+  font-size: clamp(29px,5vw,46px);
+  margin: 12px 0;
+}
+
+.discount {
+  font-size: clamp(42px,7vw,68px);
+  font-weight: 900;
+  color: #29c9ed;
+  line-height: 1.3;
+}
+
+.promo-box p {
+  color: #b2c5db;
+  margin: 15px auto 25px;
+}
+
+.agent {
+  background: #09192d;
+}
+
+.agent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+}
+
+.agent-text h2 {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.agent-text p { color: var(--muted); }
+
+.agent-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin-top: 25px;
+}
+
+.agent-item {
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255,255,255,.025);
+  font-size: 14px;
+}
+
+.agent-panel {
+  background: linear-gradient(145deg,#143354,#0b1e34);
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.agent-panel h3 {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.agent-panel p {
+  color: #b4c7dc;
+  margin: 12px 0;
+}
+
+.agent-panel p span { color: var(--cyan); }
+
+.technology {
+  background: var(--bg);
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 15px;
+}
+
+.tech-item {
+  text-align: center;
+  padding: 22px 12px;
+  background: #10243d;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.tech-item strong {
+  display: block;
+  font-size: 17px;
+}
+
+.tech-item span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.contact {
+  background:
+    radial-gradient(ellipse at 50% 100%,rgba(17,126,225,.16),transparent 60%),
+    #091a2f;
+}
+
+.contact-box {
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  padding: 50px 20px;
+  background: rgba(17,43,70,.55);
+}
+
+.contact-box h2 {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.contact-box p {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.email {
+  display: inline-block;
+  color: var(--cyan);
+  font-size: 18px;
+  margin: 12px 0 24px;
+  word-break: break-word;
+}
+
+footer {
+  padding: 30px 0;
+  border-top: 1px solid var(--border);
+  color: #8298b2;
+  text-align: center;
+  font-size: 12px;
+}
+
+.footer-logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.footer-logo span { color: var(--cyan); }
+
+.float-actions {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.float-btn {
+  border: 0;
+  border-radius: 30px;
+  padding: 13px 19px;
+  color: white;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 8px 30px rgba(0,80,180,.3);
+  box-shadow: 0 5px 22px rgba(0,0,0,.35);
 }
+
+.float-contact {
+  background: linear-gradient(90deg,#087cf0,#13b9df);
+}
+
+.float-agent {
+  background: linear-gradient(90deg,#147d9f,#12bda9);
+}
+
 .chat-window {
   display: none;
   position: fixed;
-  right: 24px;
-  bottom: 150px;
-  width: min(360px, calc(100vw - 30px));
-  height: 440px;
-  max-height: calc(100vh - 180px);
-  z-index: 400;
-  background: #0d1d30;
-  border: 1px solid rgba(53,223,208,.35);
-  border-radius: 16px;
+  right: 22px;
+  bottom: 145px;
+  width: min(340px,calc(100vw - 35px));
+  background: #10243d;
+  border: 1px solid #285176;
+  border-radius: 13px;
   overflow: hidden;
-  box-shadow: 0 15px 55px rgba(0,0,0,.45);
+  z-index: 1000;
+  box-shadow: 0 10px 40px rgba(0,0,0,.45);
 }
+
 .chat-header {
-  padding: 16px;
-  background: linear-gradient(120deg, #087fbd, #176bd5);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 17px;
+  background: linear-gradient(90deg,#116ec9,#087eaa);
   font-weight: bold;
 }
-.chat-close {
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-}
-.chat-body { padding: 15px; height: calc(100% - 58px); overflow-y: auto; }
-.chat-message {
-  background: #172d45;
-  color: #e9f2ff;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 13px;
+
+.chat-body { padding: 18px; }
+
+.chat-body p {
+  color: #d6e5f4;
   font-size: 14px;
-  white-space: pre-line;
+  margin-bottom: 13px;
 }
-.chat-question {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 10px 12px;
-  margin: 7px 0;
-  border: 1px solid rgba(53,223,208,.25);
-  background: #10243a;
-  color: #dceeff;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.chat-question:hover { border-color: var(--cyan); color: var(--cyan); }
 
-/* 网页通话提示 */
-.call-notice {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(0,0,0,.72);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+.chat-options {
+  display: grid;
+  gap: 9px;
 }
-.call-dialog {
-  width: min(420px, 100%);
-  background: #10243a;
-  border: 1px solid rgba(53,223,208,.4);
-  border-radius: 18px;
-  padding: 32px 25px;
-  text-align: center;
-  box-shadow: 0 20px 70px rgba(0,0,0,.5);
-}
-.call-dialog-icon { font-size: 45px; margin-bottom: 12px; }
-.call-dialog h3 { font-size: 23px; margin-bottom: 12px; }
-.call-dialog p { color: var(--muted); margin-bottom: 23px; }
-.call-dialog-close {
-  display: block;
-  margin: 16px auto 0;
-  border: 1px solid var(--border);
+
+.chat-options button {
+  padding: 10px;
+  background: #193756;
+  border: 1px solid #345b7c;
+  border-radius: 7px;
   color: white;
-  background: transparent;
-  padding: 9px 25px;
-  border-radius: 8px;
+  text-align: left;
   cursor: pointer;
 }
 
-@media(max-width: 850px) {
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .process-grid { grid-template-columns: repeat(2, 1fr); }
+.chat-answer {
+  display: none;
+  padding: 12px;
+  background: #193756;
+  border-radius: 7px;
+  font-size: 13px;
+  color: #c9deef;
+  margin-top: 13px;
 }
-@media(max-width: 650px) {
+
+@media(max-width:850px) {
   .nav-links {
     display: none;
     position: absolute;
-    top: 72px;
+    top: 76px;
     left: 0;
-    right: 0;
+    width: 100%;
     padding: 20px;
-    background: #0b192a;
+    background: #0b1d34;
     flex-direction: column;
-    align-items: flex-start;
     gap: 18px;
     border-bottom: 1px solid var(--border);
   }
-  .nav-links.show { display: flex; }
+
+  .nav-links.active { display: flex; }
   .menu-btn { display: block; }
-  .hero { padding: 75px 0; }
+  .platform-grid { grid-template-columns: repeat(2,1fr); }
+  .service-grid { grid-template-columns: repeat(2,1fr); }
+  .agent-grid { grid-template-columns: 1fr; }
+  .tech-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+@media(max-width:520px) {
+  .hero { padding: 135px 0 75px; }
   section { padding: 65px 0; }
-  .services-grid, .solution-grid, .process-grid { grid-template-columns: 1fr; }
-  .section-heading h2 { font-size: 28px; }
-  .call-launcher { right: 15px; bottom: 78px; padding: 12px 17px; }
-  .chat-launcher { right: 15px; bottom: 15px; padding: 12px 17px; }
-  .chat-window { right: 12px; bottom: 140px; width: calc(100vw - 24px); }
+  .service-grid { grid-template-columns: 1fr; }
+  .platform-grid { gap: 10px; }
+  .platform { padding: 20px 10px; }
+  .agent-list { grid-template-columns: 1fr; }
+  .hero p { font-size: 15px; }
+  .float-actions { right: 13px; bottom: 15px; }
+  .chat-window { right: 12px; bottom: 135px; }
 }
 </style>
 </head>
@@ -355,15 +600,17 @@ footer {
 <header>
   <div class="container nav">
     <a href="#home" class="logo">DATOU <span>CLOUD</span></a>
+
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="打开导航菜单">☰</button>
+
     <nav class="nav-links" id="navLinks">
-      <a href="#home">首页</a>
-      <a href="#services">服务项目</a>
-      <a href="#solutions">解决方案</a>
-      <a href="#process">服务流程</a>
-      <a href="#about">关于我们</a>
-      <a href="#contact">联系我们</a>
+      <a href="#home" onclick="closeMenu()">首页</a>
+      <a href="#platforms" onclick="closeMenu()">云平台</a>
+      <a href="#services" onclick="closeMenu()">云产品</a>
+      <a href="#agents" onclick="closeMenu()">代理合作</a>
+      <a href="#technology" onclick="closeMenu()">技术服务</a>
+      <a href="#contact" class="nav-cta" onclick="closeMenu()">商务咨询</a>
     </nav>
-    <button class="menu-btn" onclick="toggleMenu()">☰ 菜单</button>
   </div>
 </header>
 
@@ -372,180 +619,279 @@ footer {
 <section class="hero" id="home">
   <div class="container">
     <div class="hero-content">
-      <div class="eyebrow">DATOU CLOUD · 专业技术服务</div>
-      <h1>通信系统与云技术<br><span>一站式部署服务</span></h1>
+      <div class="eyebrow">GLOBAL CLOUD RESOURCE PROVIDER</div>
+
+      <h1>
+        全球云资源供应<br>
+        <span>让企业部署更简单</span>
+      </h1>
+
       <p>
-        专注企业通信系统、呼叫中心、PBX语音网关、即时通讯、
-        WebRTC网页通话以及海外云服务器部署。
-        从系统搭建、线路调试到后期维护，为企业提供专业技术支持。
+        DATOU CLOUD 大头云，提供多家主流云平台资源采购协助、
+        海外云服务器、公网 IP、CDN、数据库及企业技术服务。
+        为企业客户、开发者和渠道代理提供灵活的云资源选择。
       </p>
-      <div class="hero-actions">
-        <a href="#services" class="btn">查看服务项目</a>
-        <a href="#contact" class="btn btn-outline">联系技术顾问</a>
+
+      <div class="hero-buttons">
+        <a href="#services" class="btn btn-primary">查看云产品</a>
+        <a href="#agents" class="btn btn-outline">加入代理合作</a>
+      </div>
+
+      <div class="hero-tags">
+        <span>多云平台资源</span>
+        <span>海外云服务器</span>
+        <span>渠道优惠价格</span>
+        <span>技术支持</span>
       </div>
     </div>
   </div>
 </section>
 
-<section id="services">
+<section class="platforms" id="platforms">
   <div class="container">
-    <div class="section-heading">
-      <h2>我们的服务</h2>
-      <p>覆盖企业通信、呼叫中心、网络及云平台部署</p>
+    <div class="section-title">
+      <div class="small">CLOUD PLATFORMS</div>
+      <h2>多家云平台资源</h2>
+      <p>不局限于单一厂商，根据业务需求灵活选择</p>
     </div>
-    <div class="services-grid">
+
+    <div class="platform-grid">
+      <div class="platform">
+        <div class="symbol">☁️</div>
+        <h3>腾讯云</h3>
+        <p>Tencent Cloud</p>
+      </div>
+
+      <div class="platform">
+        <div class="symbol">🌐</div>
+        <h3>阿里云</h3>
+        <p>Alibaba Cloud</p>
+      </div>
+
+      <div class="platform">
+        <div class="symbol">🖥️</div>
+        <h3>海外云平台</h3>
+        <p>Global Cloud Providers</p>
+      </div>
+
+      <div class="platform">
+        <div class="symbol">⚡</div>
+        <h3>更多云资源</h3>
+        <p>Multi-Cloud Resources</p>
+      </div>
+    </div>
+
+    <div class="note">
+      * 以上为产品来源及资源类型示意，具体可供应厂商、地域、规格及折扣以实际报价为准。
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-title">
+      <div class="small">CLOUD PRODUCTS</div>
+      <h2>丰富的云产品资源</h2>
+      <p>从基础服务器到企业级云基础设施，满足不同业务需求</p>
+    </div>
+
+    <div class="service-grid">
 
       <div class="service-card">
-        <div class="service-icon">☎️</div>
-        <h3>3CX 通信系统</h3>
-        <p>3CX 系统部署、授权咨询、分机配置、SIP Trunk 对接、呼入呼出调试及系统维护。</p>
+        <div class="service-icon">🖥️</div>
+        <h3>云服务器 CVM</h3>
+        <p>为网站、应用、企业系统提供计算资源。</p>
+        <ul>
+          <li>Linux / Windows</li>
+          <li>海外多地域选择</li>
+          <li>不同 CPU 与内存配置</li>
+        </ul>
       </div>
 
       <div class="service-card">
-        <div class="service-icon">🎧</div>
-        <h3>OKCC 呼叫中心</h3>
-        <p>OKCC 系统部署、合法授权及源码使用范围内的安装配置、坐席管理、线路调试和维护。</p>
+        <div class="service-icon">🌍</div>
+        <h3>公网 IP 资源</h3>
+        <p>满足服务器公网访问及网络部署需求。</p>
+        <ul>
+          <li>公网 IPv4</li>
+          <li>弹性公网 IP</li>
+          <li>网络配置协助</li>
+        </ul>
       </div>
 
       <div class="service-card">
-        <div class="service-icon">🔗</div>
-        <h3>SIP 对接与调试</h3>
-        <p>协助客户对接已有 SIP 服务，处理注册失败、呼叫失败、号码格式、信令及语音问题。</p>
+        <div class="service-icon">🚀</div>
+        <h3>CDN 内容加速</h3>
+        <p>为网站和应用提供内容分发服务。</p>
+        <ul>
+          <li>静态资源加速</li>
+          <li>全球节点选择</li>
+          <li>访问性能优化</li>
+        </ul>
       </div>
 
       <div class="service-card">
-        <div class="service-icon">📡</div>
-        <h3>语音网关与 PBX</h3>
-        <p>语音网关、PBX 设备配置调试，支持 E1/PRI、FXO、FXS 等设备对接与故障排查。</p>
+        <div class="service-icon">💾</div>
+        <h3>云存储服务</h3>
+        <p>提供文件、图片和业务数据存储方案。</p>
+        <ul>
+          <li>对象存储</li>
+          <li>云硬盘</li>
+          <li>存储扩容</li>
+        </ul>
       </div>
 
       <div class="service-card">
-        <div class="service-icon">💬</div>
-        <h3>即时聊天系统</h3>
-        <p>企业即时聊天平台搭建，用户管理、消息功能、私有化部署及系统维护。</p>
+        <div class="service-icon">🗄️</div>
+        <h3>云数据库</h3>
+        <p>为网站、平台和企业应用提供数据库服务。</p>
+        <ul>
+          <li>MySQL</li>
+          <li>Redis</li>
+          <li>数据库迁移与配置</li>
+        </ul>
       </div>
 
       <div class="service-card">
-        <div class="service-icon">🎥</div>
-        <h3>即时语音与视频</h3>
-        <p>即时语音、视频通话系统搭建，支持企业内部沟通及业务平台集成。</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🌐</div>
-        <h3>WebRTC 网页通话</h3>
-        <p>浏览器软电话、网页点击通话、WebRTC 与 PBX 集成及嵌入式通信功能开发。</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">☁️</div>
-        <h3>海外云服务器</h3>
-        <p>海外 VPS、云服务器、公网 IPv4 资源选购协助，服务器部署、网络配置及迁移。</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🛠️</div>
-        <h3>Linux 与系统运维</h3>
-        <p>Linux、Nginx、Docker、数据库、安全加固、故障排查、系统升级和日常维护。</p>
+        <div class="service-icon">🛡️</div>
+        <h3>云网络与安全</h3>
+        <p>协助构建安全、可靠的网络环境。</p>
+        <ul>
+          <li>负载均衡</li>
+          <li>DDoS 防护</li>
+          <li>网络安全配置</li>
+        </ul>
       </div>
 
     </div>
   </div>
 </section>
 
-<section class="dark-section" id="solutions">
+<section class="promo">
   <div class="container">
-    <div class="section-heading">
-      <h2>企业解决方案</h2>
-      <p>根据企业实际业务需求，提供系统组合与技术实施方案</p>
-    </div>
-    <div class="solution-grid">
-      <div class="solution-card">
-        <h3>企业电话系统</h3>
-        <p>通过 3CX、PBX、SIP 及语音网关，为企业搭建内部电话、分机管理、呼入呼出及远程办公通信系统。</p>
-      </div>
-      <div class="solution-card">
-        <h3>呼叫中心系统</h3>
-        <p>根据业务需求搭建 OKCC 等呼叫中心平台，配置坐席、队列、通话记录及相关管理功能。</p>
-      </div>
-      <div class="solution-card">
-        <h3>网页通信集成</h3>
-        <p>将即时聊天、语音视频、WebRTC 浏览器通话集成到企业网站或业务管理平台。</p>
-      </div>
-      <div class="solution-card">
-        <h3>海外服务器部署</h3>
-        <p>协助选择海外云服务器及公网 IP，完成系统安装、网络配置、安全加固和应用部署。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="process">
-  <div class="container">
-    <div class="section-heading">
-      <h2>服务流程</h2>
-      <p>从需求沟通到部署交付，流程清晰透明</p>
-    </div>
-    <div class="process-grid">
-      <div class="process-item">
-        <div class="process-number">01</div>
-        <h3>需求沟通</h3>
-        <p>了解企业业务、设备、线路及系统需求。</p>
-      </div>
-      <div class="process-item">
-        <div class="process-number">02</div>
-        <h3>方案评估</h3>
-        <p>根据实际环境制定部署和实施方案。</p>
-      </div>
-      <div class="process-item">
-        <div class="process-number">03</div>
-        <h3>部署调试</h3>
-        <p>完成系统安装、配置、对接与功能测试。</p>
-      </div>
-      <div class="process-item">
-        <div class="process-number">04</div>
-        <h3>交付维护</h3>
-        <p>提供使用说明、技术支持及后续维护。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="dark-section" id="about">
-  <div class="container">
-    <div class="about-box">
-      <div class="section-heading">
-        <h2>关于大头云</h2>
-        <p>DATOU CLOUD · 通信系统与云技术服务</p>
-      </div>
+    <div class="promo-box">
+      <div class="eyebrow">CHANNEL PRICE ADVANTAGE</div>
+      <h2>多云资源渠道优惠</h2>
+      <div class="discount">最高约 7 折</div>
       <p>
-        大头云专注于企业通信系统及云计算基础设施技术服务，
-        致力于为企业和项目客户提供专业的系统部署、设备调试、
-        平台集成及技术维护支持。
+        多平台资源渠道采购，根据产品类型、地域及采购条件提供优惠报价。
+        欢迎咨询具体配置和价格。
       </p>
-      <p>
-        我们关注 3CX、OKCC、SIP、PBX、语音网关、
-        即时通讯、WebRTC 及海外云服务器等技术领域，
-        根据客户现有设备、平台和业务需求提供实施方案。
-      </p>
-      <p>
-        涉及软件授权、第三方平台、通信线路及网络资源的服务，
-        均以合法授权和适用服务商规定为前提。
-      </p>
+      <a href="mailto:khjhbn277@gmail.com?subject=云资源价格咨询"
+         class="btn btn-primary">获取专属报价</a>
     </div>
   </div>
 </section>
 
-<section id="contact">
+<section class="agent" id="agents">
+  <div class="container">
+    <div class="agent-grid">
+
+      <div class="agent-text">
+        <div class="eyebrow">PARTNER PROGRAM</div>
+        <h2>开放代理合作<br>共建云资源渠道</h2>
+        <p>
+          DATOU CLOUD 面向个人代理、技术工作室、服务器经销商、
+          企业渠道及项目团队开放合作。
+          多种云产品可供选择，让你的业务不再局限于单一服务器。
+        </p>
+
+        <div class="agent-list">
+          <div class="agent-item">✓ 渠道优惠采购</div>
+          <div class="agent-item">✓ 多平台资源选择</div>
+          <div class="agent-item">✓ 产品咨询支持</div>
+          <div class="agent-item">✓ 技术协助</div>
+          <div class="agent-item">✓ 长期合作</div>
+          <div class="agent-item">✓ 灵活业务拓展</div>
+        </div>
+      </div>
+
+      <div class="agent-panel">
+        <h3>诚招合作代理</h3>
+        <p><span>01 /</span> 个人代理：适合拥有客户资源的个人</p>
+        <p><span>02 /</span> 工作室：适合服务器销售及技术团队</p>
+        <p><span>03 /</span> 企业渠道：适合拥有企业客户资源的团队</p>
+        <p><span>04 /</span> 项目合作：根据业务需求匹配云资源</p>
+
+        <br>
+        <a href="mailto:khjhbn277@gmail.com?subject=DATOU%20CLOUD代理合作申请"
+           class="btn btn-primary">申请代理合作</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="technology" id="technology">
+  <div class="container">
+    <div class="section-title">
+      <div class="small">TECHNICAL SERVICES</div>
+      <h2>不只是云资源，更有技术服务</h2>
+      <p>从服务器采购到系统部署，为企业业务提供技术支持</p>
+    </div>
+
+    <div class="tech-grid">
+      <div class="tech-item">
+        <strong>Linux / Windows</strong>
+        <span>系统安装与配置</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>Docker / Nginx</strong>
+        <span>环境部署与优化</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>3CX / OKCC</strong>
+        <span>企业通信系统部署</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>FreePBX / Asterisk</strong>
+        <span>PBX 系统配置</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>SIP / VoIP</strong>
+        <span>信令与线路调试</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>PBX Gateway</strong>
+        <span>语音网关设备调试</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>WebRTC</strong>
+        <span>网页即时通话集成</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>IT 运维</strong>
+        <span>迁移、维护与故障排查</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
   <div class="container">
     <div class="contact-box">
-      <h2>需要技术支持？</h2>
-      <p>告诉我们你的系统、设备或项目需求，我们会通过邮件与你联系。</p>
-      <a class="btn" href="mailto:khjhbn277@gmail.com">✉ 发送邮件</a>
-      <p style="margin-top:25px;margin-bottom:8px;">联系邮箱</p>
-      <a class="email-address" href="mailto:khjhbn277@gmail.com">
+      <div class="eyebrow">CONTACT DATOU CLOUD</div>
+      <h2>寻找合适的云资源？</h2>
+      <p>
+        无论你是企业客户、开发者还是渠道代理，<br>
+        欢迎联系我们获取产品报价及合作方案。
+      </p>
+
+      <a class="email" href="mailto:khjhbn277@gmail.com">
         khjhbn277@gmail.com
       </a>
+
+      <br>
+
+      <a href="mailto:khjhbn277@gmail.com?subject=DATOU%20CLOUD商务咨询"
+         class="btn btn-primary">联系商务团队</a>
     </div>
   </div>
 </section>
@@ -554,164 +900,97 @@ footer {
 
 <footer>
   <div class="container">
-    © 2026 DATOU CLOUD 大头云 · 通信系统与云技术服务
+    <div class="footer-logo">DATOU <span>CLOUD</span></div>
+    <p>全球云资源供应 · 海外云服务器 · 企业技术服务 · 渠道代理合作</p>
+    <p style="margin-top:10px;">
+      © <span id="year"></span> DATOU CLOUD. All Rights Reserved.
+    </p>
+    <p style="margin-top:10px;">
+      本网站为云资源采购及技术服务展示平台。各云厂商品牌及商标归其各自权利人所有。
+      本网站不代表相关厂商官方授权或背书。
+    </p>
   </div>
 </footer>
 
-<!-- 固定网页通话按钮 -->
-<button class="call-launcher" type="button" onclick="showCallNotice()">
-  ☎ 网页通话
-</button>
+<!-- 右下角固定商务按钮 -->
+<div class="float-actions">
+  <button class="float-btn float-agent" onclick="openAgent()">
+    🤝 代理合作
+  </button>
 
-<!-- 固定在线客服按钮 -->
-<button class="chat-launcher" id="chatLauncher" type="button" onclick="toggleChat()">
-  ✉ 在线客服
-</button>
+  <button class="float-btn float-contact" onclick="toggleChat()">
+    ✉ 在线客服
+  </button>
+</div>
 
 <!-- 在线客服窗口 -->
 <div class="chat-window" id="chatWindow">
   <div class="chat-header">
-    <span>大头云在线客服</span>
-    <button class="chat-close" onclick="toggleChat()">×</button>
+    DATOU CLOUD 在线客服
+    <span onclick="toggleChat()"
+      style="float:right;cursor:pointer;">✕</span>
   </div>
-  <div class="chat-body" id="chatBody">
-    <div class="chat-message">
-      您好，欢迎联系大头云！
 
-      请点击下面的问题，查看相关服务介绍。
-      如果您有其他需求，也可以直接发送邮件联系我们。
+  <div class="chat-body">
+    <p>您好，欢迎来到大头云！请选择您想咨询的业务：</p>
+
+    <div class="chat-options">
+      <button onclick="answer('云服务器')">☁️ 云服务器及海外资源</button>
+      <button onclick="answer('代理合作')">🤝 代理合作与渠道价格</button>
+      <button onclick="answer('公网IP')">🌍 公网 IP 与网络产品</button>
+      <button onclick="answer('技术服务')">🛠 技术部署与系统维护</button>
     </div>
-    <div id="chatQuestions"></div>
-  </div>
-</div>
 
-<!-- 网页通话忙碌提示 -->
-<div class="call-notice" id="callNotice" onclick="closeCallNoticeOutside(event)">
-  <div class="call-dialog">
-    <div class="call-dialog-icon">☎️</div>
-    <h3>当前忙碌中</h3>
-    <p>您好，网页通话目前忙碌中，请通过邮件联系我们。我们收到邮件后会尽快回复您。</p>
-    <a class="btn" href="mailto:khjhbn277@gmail.com">
-      ✉ 通过邮件联系我们
+    <div class="chat-answer" id="chatAnswer"></div>
+
+    <a id="chatMail"
+       href="mailto:khjhbn277@gmail.com"
+       class="btn btn-primary"
+       style="display:block;text-align:center;margin-top:14px;">
+       邮件联系商务
     </a>
-    <button class="call-dialog-close" type="button" onclick="closeCallNotice()">
-      关闭
-    </button>
   </div>
 </div>
 
 <script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
 function toggleMenu() {
-  document.getElementById("navLinks").classList.toggle("show");
+  document.getElementById("navLinks").classList.toggle("active");
 }
 
-function showCallNotice() {
-  document.getElementById("callNotice").style.display = "flex";
-}
-
-function closeCallNotice() {
-  document.getElementById("callNotice").style.display = "none";
-}
-
-function closeCallNoticeOutside(event) {
-  if (event.target.id === "callNotice") {
-    closeCallNotice();
-  }
+function closeMenu() {
+  document.getElementById("navLinks").classList.remove("active");
 }
 
 function toggleChat() {
-  const chat = document.getElementById("chatWindow");
-  chat.style.display = chat.style.display === "block" ? "none" : "block";
+  const box = document.getElementById("chatWindow");
+  box.style.display =
+    box.style.display === "block" ? "none" : "block";
 }
 
-const faq = [
-  {
-    question: "3CX 系统部署与授权",
-    answer: "我们提供 3CX 系统部署、配置、授权咨询、分机设置、SIP 对接及系统维护服务。请通过邮件说明您的服务器和业务需求。"
-  },
-  {
-    question: "OKCC 呼叫中心系统",
-    answer: "我们提供 OKCC 呼叫中心系统安装部署、坐席配置、系统调试及维护服务，具体以合法授权和源码使用范围为前提。"
-  },
-  {
-    question: "SIP 线路对接调试",
-    answer: "我们可以协助调试客户已有的 SIP 服务，包括注册、呼入呼出、号码格式、信令及语音问题。我们不销售通信线路。"
-  },
-  {
-    question: "语音网关 / PBX 设备",
-    answer: "支持语音网关、PBX 设备及 E1/PRI、FXO、FXS 等设备的配置、对接和故障排查。"
-  },
-  {
-    question: "即时聊天系统",
-    answer: "我们提供企业即时聊天系统搭建、私有化部署、用户管理及平台集成服务。"
-  },
-  {
-    question: "即时语音与视频通话",
-    answer: "我们提供即时语音、视频通信系统搭建及企业业务平台集成服务。"
-  },
-  {
-    question: "WebRTC 网页通话",
-    answer: "我们提供 WebRTC 浏览器软电话、网页点击通话及 PBX 集成方案。"
-  },
-  {
-    question: "海外云服务器 / 公网 IP",
-    answer: "我们提供海外 VPS、云服务器及公网 IPv4 资源选购协助，以及服务器安装、网络配置和维护服务。"
-  },
-  {
-    question: "其他技术需求",
-    answer: "请通过邮件告诉我们您的项目需求、服务器环境和联系方式，我们会进一步沟通。"
-  }
-];
+function answer(type) {
+  const messages = {
+    "云服务器": "我们可协助提供多家云平台的海外云服务器资源。请通过邮件告知所需地域、CPU、内存和带宽配置。",
+    "代理合作": "欢迎个人代理、工作室和企业渠道合作。请发送邮件，备注代理合作，我们会进一步沟通渠道价格与合作方式。",
+    "公网IP": "可咨询公网 IPv4、弹性公网 IP 及相关网络产品，具体地域和资源情况以实际报价为准。",
+    "技术服务": "我们提供 Linux、Windows、3CX、OKCC、FreePBX、PBX 语音网关及 WebRTC 等系统部署和技术服务。"
+  };
 
-function showQuestions() {
-  const box = document.getElementById("chatQuestions");
-  box.innerHTML = "";
+  const box = document.getElementById("chatAnswer");
+  box.style.display = "block";
+  box.textContent = messages[type];
 
-  faq.forEach((item, index) => {
-    const button = document.createElement("button");
-    button.className = "chat-question";
-    button.type = "button";
-    button.textContent = item.question;
-    button.onclick = function() {
-      showAnswer(index);
-    };
-    box.appendChild(button);
-  });
+  document.getElementById("chatMail").href =
+    "mailto:khjhbn277@gmail.com?subject=" +
+    encodeURIComponent(type + "咨询");
 }
 
-function showAnswer(index) {
-  const chatBody = document.getElementById("chatBody");
-  const item = faq[index];
-
-  const question = document.createElement("div");
-  question.className = "chat-message";
-  question.textContent = "您咨询的是：" + item.question;
-
-  const answer = document.createElement("div");
-  answer.className = "chat-message";
-  answer.textContent = item.answer;
-
-  chatBody.appendChild(question);
-  chatBody.appendChild(answer);
-
-  const email = document.createElement("a");
-  email.className = "btn";
-  email.href = "mailto:khjhbn277@gmail.com";
-  email.textContent = "✉ 邮件联系大头云";
-  email.style.marginBottom = "15px";
-
-  chatBody.appendChild(email);
-  chatBody.scrollTop = chatBody.scrollHeight;
+function openAgent() {
+  document.getElementById("chatWindow").style.display = "block";
+  answer("代理合作");
 }
-
-showQuestions();
-
-document.addEventListener("keydown", function(event) {
-  if (event.key === "Escape") {
-    closeCallNotice();
-    document.getElementById("chatWindow").style.display = "none";
-  }
-});
 </script>
 
 </body>
