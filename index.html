@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="大头云 DATOU CLOUD，提供3CX、OKCC、SIP通信系统部署、语音网关调试、即时通讯、WebRTC集成及海外云服务器技术服务。">
-<title>大头云 DATOU CLOUD | 通信系统与云技术服务</title>
+<title>大头云 DATOU CLOUD | 企业通信与云技术服务</title>
+
 <style>
 :root {
   --bg: #07111f;
@@ -25,12 +26,14 @@ body {
   line-height: 1.7;
 }
 a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
 .container { width: min(1160px, 92%); margin: auto; }
+
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(7,17,31,.94);
+  background: rgba(7,17,31,.95);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
@@ -46,7 +49,7 @@ header {
   letter-spacing: 1px;
 }
 .logo span { color: var(--blue); }
-.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links { display: flex; gap: 25px; align-items: center; }
 .nav-links a { color: var(--muted); font-size: 14px; }
 .nav-links a:hover { color: var(--cyan); }
 .menu-btn {
@@ -58,8 +61,12 @@ header {
   border-radius: 8px;
   font-size: 20px;
 }
+
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   padding: 12px 23px;
   border-radius: 8px;
   background: linear-gradient(120deg, var(--blue), #3476ff);
@@ -73,8 +80,10 @@ header {
   border: 1px solid var(--blue);
   color: var(--blue);
 }
+.btn:hover { opacity: .88; transform: translateY(-1px); }
+
 .hero {
-  padding: 110px 0 100px;
+  padding: 105px 0 85px;
   background:
     radial-gradient(ellipse at 75% 20%, rgba(40,168,255,.2), transparent 40%),
     radial-gradient(ellipse at 15% 70%, rgba(53,224,208,.1), transparent 35%);
@@ -111,7 +120,7 @@ header {
   display: grid;
   grid-template-columns: repeat(4,1fr);
   gap: 16px;
-  margin-top: 65px;
+  margin-top: 60px;
 }
 .stat {
   padding: 22px;
@@ -121,10 +130,12 @@ header {
 }
 .stat strong { display: block; font-size: 23px; color: var(--cyan); }
 .stat span { color: var(--muted); font-size: 13px; }
+
 section { padding: 85px 0; }
 .section-head { text-align: center; margin-bottom: 45px; }
 .section-head h2 { font-size: 34px; margin-bottom: 12px; }
 .section-head p { color: var(--muted); }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3,1fr);
@@ -160,7 +171,12 @@ section { padding: 85px 0; }
   font-size: 13px;
   padding: 5px 0;
 }
-.service-card li::before { content: "✓"; color: var(--cyan); margin-right: 8px; }
+.service-card li::before {
+  content: "✓";
+  color: var(--cyan);
+  margin-right: 8px;
+}
+
 .dark-section { background: #0a1727; }
 .feature-grid {
   display: grid;
@@ -177,8 +193,16 @@ section { padding: 85px 0; }
 .feature-box h3 { font-size: 23px; margin-bottom: 15px; }
 .feature-box p { color: var(--muted); margin-bottom: 15px; }
 .feature-list { list-style: none; }
-.feature-list li { padding: 9px 0; border-bottom: 1px solid var(--line); }
-.feature-list li::before { content: "◆"; color: var(--blue); margin-right: 12px; }
+.feature-list li {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.feature-list li::before {
+  content: "◆";
+  color: var(--blue);
+  margin-right: 12px;
+}
+
 .process {
   display: grid;
   grid-template-columns: repeat(4,1fr);
@@ -193,6 +217,7 @@ section { padding: 85px 0; }
 .process-item strong { color: var(--blue); font-size: 28px; }
 .process-item h3 { margin: 10px 0; }
 .process-item p { color: var(--muted); font-size: 14px; }
+
 .contact {
   text-align: center;
   background:
@@ -200,12 +225,9 @@ section { padding: 85px 0; }
     #0a1727;
 }
 .contact h2 { font-size: 36px; margin-bottom: 15px; }
-.contact p { color: var(--muted); margin-bottom: 28px; }
-.contact-info {
-  margin-top: 25px;
-  color: var(--muted);
-  font-size: 14px;
-}
+.contact p { color: var(--muted); margin-bottom: 24px; }
+.contact-info { margin-top: 25px; color: var(--muted); font-size: 14px; }
+
 footer {
   padding: 30px 0;
   border-top: 1px solid var(--line);
@@ -218,6 +240,156 @@ footer {
   gap: 20px;
   flex-wrap: wrap;
 }
+
+/* Customer service */
+.chat-launcher {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 300;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 21px;
+  background: linear-gradient(120deg, #168ee8, #2767e8);
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0,100,220,.35);
+}
+.chat-window {
+  position: fixed;
+  right: 24px;
+  bottom: 90px;
+  z-index: 301;
+  width: min(370px, calc(100vw - 32px));
+  height: 520px;
+  max-height: calc(100vh - 120px);
+  background: #102035;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 17px;
+  box-shadow: 0 15px 60px rgba(0,0,0,.45);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+.chat-window.open { display: flex; }
+.chat-header {
+  padding: 16px;
+  background: #142e49;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat-header strong { font-size: 15px; }
+.chat-header small { display: block; color: #9db0c7; font-size: 12px; }
+.chat-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.message {
+  max-width: 88%;
+  padding: 11px 13px;
+  border-radius: 12px;
+  font-size: 13px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bot-message {
+  background: #1b3550;
+  color: #edf5ff;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+.user-message {
+  background: #167bd0;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+.chat-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-option {
+  text-align: left;
+  border: 1px solid rgba(53,224,208,.35);
+  color: #aeece9;
+  background: rgba(53,224,208,.06);
+  padding: 9px 11px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.chat-option:hover { background: rgba(53,224,208,.16); }
+.chat-bottom {
+  padding: 12px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+}
+.chat-bottom input {
+  min-width: 0;
+  flex: 1;
+  background: #0a1727;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  outline: none;
+}
+.chat-bottom button {
+  background: #168ee8;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Click to call placeholder */
+.call-notice {
+  position: fixed;
+  z-index: 400;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.call-notice.show { display: flex; }
+.call-dialog {
+  width: min(380px, 100%);
+  background: #12243a;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+}
+.call-dialog h3 { margin-bottom: 12px; }
+.call-dialog p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+.call-dialog button {
+  border: none;
+  background: #168ee8;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
 @media(max-width:850px) {
   .grid { grid-template-columns: repeat(2,1fr); }
   .stats { grid-template-columns: repeat(2,1fr); }
@@ -246,9 +418,12 @@ footer {
   .process { grid-template-columns: 1fr 1fr; }
   .section-head h2 { font-size: 28px; }
   .contact h2 { font-size: 29px; }
+  .chat-launcher { right: 15px; bottom: 15px; }
+  .chat-window { right: 12px; bottom: 78px; }
 }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -280,6 +455,7 @@ footer {
       <div class="hero-actions">
         <a class="btn" href="#services">查看服务项目</a>
         <a class="btn btn-outline" href="#contact">联系技术团队</a>
+        <button class="btn" type="button" onclick="showCallNotice()">◉ 点击通话</button>
       </div>
     </div>
 
@@ -346,7 +522,7 @@ footer {
         <ul>
           <li>E1 / PRI 数字中继调试</li>
           <li>FXO / FXS 网关配置</li>
-          <li>鼎信等语音网关设备调试</li>
+          <li>语音网关设备调试</li>
           <li>Asterisk / FreeSWITCH 对接</li>
           <li>信令与语音质量排查</li>
         </ul>
@@ -516,10 +692,14 @@ footer {
   <div class="container">
     <h2>需要部署或调试通信系统？</h2>
     <p>告诉我们你的项目需求，我们可以协助评估技术方案。</p>
-    <a class="btn" href="mailto:YOUR_EMAIL@example.com">发送邮件咨询</a>
+    <a class="btn" href="mailto:gaozhipeng026@gmail.com">✉ 发送邮件咨询</a>
     <div class="contact-info">
-      <p>业务咨询邮箱：YOUR_EMAIL@example.com</p>
+      <p>业务咨询邮箱：gaozhipeng026@gmail.com</p>
       <p>DATOU CLOUD · 企业通信与云技术服务</p>
+    </div>
+    <div style="margin-top:22px">
+      <button class="btn btn-outline" type="button" onclick="showCallNotice()">◉ 网页点击通话</button>
+      <p style="font-size:12px;margin-top:10px">网页通话功能正在准备中，暂未开放真实通话。</p>
     </div>
   </div>
 </section>
@@ -532,7 +712,46 @@ footer {
   </div>
 </footer>
 
+<!-- Customer service button -->
+<button class="chat-launcher" id="chatLauncher" type="button">✉ 在线客服</button>
+
+<!-- Customer service window -->
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div>
+      <strong>大头云在线客服</strong>
+      <small>● 自动问答服务</small>
+    </div>
+    <button class="chat-close" id="chatClose" type="button">×</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="message bot-message">
+      您好！欢迎来到大头云 DATOU CLOUD！
+
+      我可以为您介绍我们的服务，请选择您想了解的项目。
+    </div>
+    <div class="chat-options" id="chatOptions"></div>
+  </div>
+  <form class="chat-bottom" id="chatForm">
+    <input id="chatInput" type="text" placeholder="输入您的问题..." autocomplete="off">
+    <button type="submit">发送</button>
+  </form>
+</div>
+
+<!-- Click to call notice: no actual call connection yet -->
+<div class="call-notice" id="callNotice">
+  <div class="call-dialog">
+    <h3>网页点击通话</h3>
+    <p>感谢您联系大头云！网页通话功能目前正在准备中，暂未连接真实通话系统。您可以先通过邮件联系我们。</p>
+    <a class="btn" href="mailto:gaozhipeng026@gmail.com">发送邮件</a>
+    <div style="margin-top:15px">
+      <button type="button" onclick="closeCallNotice()">关闭</button>
+    </div>
+  </div>
+</div>
+
 <script>
+/* Mobile navigation */
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 
@@ -547,6 +766,125 @@ document.querySelectorAll(".nav-links a").forEach(link => {
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+/* Click to call placeholder */
+function showCallNotice() {
+  document.getElementById("callNotice").classList.add("show");
+}
+
+function closeCallNotice() {
+  document.getElementById("callNotice").classList.remove("show");
+}
+
+document.getElementById("callNotice").addEventListener("click", event => {
+  if (event.target.id === "callNotice") closeCallNotice();
+});
+
+/* Fixed-question customer service */
+const questions = [
+  {
+    title: "3CX 系统部署与授权",
+    answer: "我们提供3CX系统部署、官方授权咨询、分机配置、DID路由、SIP线路对接及后期维护服务。您可以通过邮件发送服务器环境和项目需求，我们会进一步沟通。"
+  },
+  {
+    title: "OKCC 呼叫中心系统",
+    answer: "我们提供OKCC呼叫中心系统环境搭建、授权及源码使用咨询、坐席配置、呼叫队列、线路对接和故障排查服务。具体方案需要根据您的业务规模确定。"
+  },
+  {
+    title: "SIP 线路对接调试",
+    answer: "我们可以协助调试客户已有的合规SIP线路，包括注册、IP认证、呼入呼出、DID、外显号码、SIP信令及RTP媒体问题。我们提供技术调试服务，不直接销售通信线路。"
+  },
+  {
+    title: "语音网关 / PBX 设备",
+    answer: "我们提供语音网关及PBX设备调试，包括E1/PRI、FXO/FXS、鼎信网关、Asterisk和FreeSWITCH对接，以及线路信令和语音质量排查。"
+  },
+  {
+    title: "即时聊天系统",
+    answer: "我们可以协助搭建企业独立即时聊天系统，支持用户管理、消息服务、网页端接入和后期维护。欢迎发送您的功能需求。"
+  },
+  {
+    title: "即时语音与视频通话",
+    answer: "我们提供企业即时语音、视频通信系统部署和集成服务，可以根据业务场景规划用户管理、音视频服务及系统架构。"
+  },
+  {
+    title: "WebRTC 网页点击通话",
+    answer: "我们可以将WebRTC网页通话功能集成到企业网站或业务平台，实现浏览器软电话、网页点击通话及PBX对接。实际通话需要配置相应的SIP、WSS和媒体服务。"
+  },
+  {
+    title: "海外云服务器 / 公网 IP",
+    answer: "我们提供海外云服务器选购建议、Linux环境搭建、域名DNS配置、公网IPv4配置协助、网络连通性测试和服务器维护服务。"
+  },
+  {
+    title: "其他技术需求",
+    answer: "请通过邮件告诉我们您的项目背景、需要实现的功能、目前使用的系统和遇到的问题，我们会根据具体情况沟通技术方案。"
+  }
+];
+
+const chatLauncher = document.getElementById("chatLauncher");
+const chatWindow = document.getElementById("chatWindow");
+const chatClose = document.getElementById("chatClose");
+const chatMessages = document.getElementById("chatMessages");
+const chatOptions = document.getElementById("chatOptions");
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+
+function addMessage(text, type) {
+  const div = document.createElement("div");
+  div.className = "message " + (type === "user" ? "user-message" : "bot-message");
+  div.textContent = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function showQuestions() {
+  chatOptions.innerHTML = "";
+  questions.forEach((item, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "chat-option";
+    button.textContent = item.title;
+    button.addEventListener("click", () => {
+      addMessage(item.title, "user");
+      addMessage(item.answer, "bot");
+      showQuestions();
+    });
+    chatOptions.appendChild(button);
+  });
+}
+
+chatLauncher.addEventListener("click", () => {
+  chatWindow.classList.toggle("open");
+});
+
+chatClose.addEventListener("click", () => {
+  chatWindow.classList.remove("open");
+});
+
+chatForm.addEventListener("submit", event => {
+  event.preventDefault();
+  const value = chatInput.value.trim();
+  if (!value) return;
+
+  addMessage(value, "user");
+  chatInput.value = "";
+
+  const normalized = value.toLowerCase();
+  const match = questions.find(item =>
+    item.title.toLowerCase().includes(normalized) ||
+    normalized.includes(item.title.toLowerCase())
+  );
+
+  if (match) {
+    addMessage(match.answer, "bot");
+  } else {
+    addMessage(
+      "感谢您的咨询！目前我是固定问题自动客服，暂时无法理解所有自由输入的问题。您可以点击上方服务分类，或者直接发送邮件至 gaozhipeng026@gmail.com 联系我们。",
+      "bot"
+    );
+  }
+});
+
+showQuestions();
 </script>
 
 </body>
